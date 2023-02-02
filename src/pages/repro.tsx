@@ -1,4 +1,4 @@
-import { withPageAuthRequired } from "@auth0/nextjs-auth0";
+import { Claims, withPageAuthRequired } from "@auth0/nextjs-auth0";
 import { InferGetServerSidePropsType } from "next";
 
 export const getServerSideProps = withPageAuthRequired({
@@ -11,3 +11,13 @@ export const getServerSideProps = withPageAuthRequired({
 });
 
 export type Props = InferGetServerSidePropsType<typeof getServerSideProps>;
+
+interface ActualProps {
+  user?: Claims | null;
+  hello: string;
+}
+
+function foo(input: Props) {
+  const x: ActualProps = input;
+  return x;
+}
